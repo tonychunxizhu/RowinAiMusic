@@ -23,11 +23,10 @@ int test();
 extern "C" JNIEXPORT jstring
 
 JNICALL
-Java_com_huawei_tony_rowinaimusic_MainActivity_stringFromJNI(
+Java_com_huawei_tony_rowinaimusic_MainActivity_nativeGetMusicById(
         JNIEnv *env,
         jobject /* this */) {
-    std::string hello = "Hello from C++";
-
+    std::string hello = "[{\"id\":\"3010606e-84e4-4ae0-9a5d-2ed0b8a1ca51\",\"title\":\"自我黎明\",\"image_url\":\"https://cdn2.suno.ai/image_3010606e-84e4-4ae0-9a5d-2ed0b8a1ca51.jpeg\",\"lyric\":\"[Verse]\\n陷于深渊 找不到归途\\n黑夜漫长 希望破灭\\n孤独中挣扎 声音呐喊\\n困境重重 心在燃烧\\n[Verse 2]\\n绝望缠绕 无尽漩涡\\n前方迷茫 无光引导\\n坚持信念 惊雷刺破\\n寒冰厚地 也会融化\\n[Chorus]\\n成为自己的光 照亮未来\\n逆风而行 勇者无惧\\n脚下荆棘 坚韧不拔\\n凭借信仰 终会胜利\\n[Verse 3]\\n每一步 痛苦加剧\\n每一瞬 挫折逼近\\n不曾屈服 心中怒火\\n力量觉醒 再次崛起\\n[Verse 4]\\n风雨交加 灵魂颤抖\\n命运挑战 意志不屈\\n黑夜终结 曙光初现\\n黎明的光 芒耀四方\\n[Chorus]\\n成为自己的光 照亮未来\\n逆风而行 勇者无惧\\n脚下荆棘 坚韧不拔\\n凭借信仰 终会胜利\",\"audio_url\":\"https://cdn1.suno.ai/3010606e-84e4-4ae0-9a5d-2ed0b8a1ca51.mp3\",\"video_url\":\"https://cdn1.suno.ai/3010606e-84e4-4ae0-9a5d-2ed0b8a1ca51.mp4\",\"created_at\":\"2024-08-18T19:20:22.079Z\",\"model_name\":\"chirp-v3.5\",\"status\":\"complete\",\"gpt_description_prompt\":\"核心主题是鼓励在困境中坚持自我，寻找希望，并积极行动去改变现状。歌词描绘了一个陷入绝望、看不到未来的情境，但同时也强调了即使身处黑暗，我们仍可以成为自己的光，并通过坚持不懈的努力，最终照亮前方的路.音乐风格Heavy metal, hard rock, guitar, bass, drum, powerful, aggresive\",\"prompt\":\"[Verse]\\n陷于深渊 找不到归途\\n黑夜漫长 希望破灭\\n孤独中挣扎 声音呐喊\\n困境重重 心在燃烧\\n\\n[Verse 2]\\n绝望缠绕 无尽漩涡\\n前方迷茫 无光引导\\n坚持信念 惊雷刺破\\n寒冰厚地 也会融化\\n\\n[Chorus]\\n成为自己的光 照亮未来\\n逆风而行 勇者无惧\\n脚下荆棘 坚韧不拔\\n凭借信仰 终会胜利\\n\\n[Verse 3]\\n每一步 痛苦加剧\\n每一瞬 挫折逼近\\n不曾屈服 心中怒火\\n力量觉醒 再次崛起\\n\\n[Verse 4]\\n风雨交加 灵魂颤抖\\n命运挑战 意志不屈\\n黑夜终结 曙光初现\\n黎明的光 芒耀四方\\n\\n[Chorus]\\n成为自己的光 照亮未来\\n逆风而行 勇者无惧\\n脚下荆棘 坚韧不拔\\n凭借信仰 终会胜利\",\"type\":\"gen\",\"tags\":\"hard rock drum heavy metal guitar powerful aggressive bass\",\"duration\":167,\"error_message\":null}]";
     return env->NewStringUTF(hello.c_str());
 }
 extern "C"

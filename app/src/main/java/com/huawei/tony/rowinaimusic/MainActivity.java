@@ -24,6 +24,8 @@ import com.huawei.tony.rowinaimusic.jsondata.JsonData;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+
+    final private String TAG = "AIMUSIC";
     JsonData jsonData = new JsonData();
     private static final int PERMISSION_REQUEST_CODE = 886;
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String videoUrl0,  videoUrl1;
 
     String audeoUrl0, audeoUrl1;
-
+    String status;
     String title, lyric;
     private VideoView videoView;
     private ProgressBar progressBar;
@@ -82,10 +84,15 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"你的Credit只剩下 "+String.valueOf(creditLeft)+"无法继续使用。请明天再继续尝试。",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                else{
+                    int times = creditLeft/10;
+                    Toast.makeText(MainActivity.this,"你的Credit剩下 "+String.valueOf(creditLeft)+", 还可以生成"+String.valueOf(times)+"首音乐",Toast.LENGTH_SHORT).show();
+                }
+
                 prompt = inputText.getText().toString();
 
                 if (prompt.length() < 10) {
-                    Toast.makeText(MainActivity.this,"提示词应不少于10个字符",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"提示词应不少于10个字符",Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -93,7 +100,11 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        createMusicandPlay();
+                        try {
+                            createMusicandPlay();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         button.setEnabled(true);
                         reply.setText(title+"\n"+lyric);
 
@@ -103,46 +114,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-//        genMusic("TEST PROMPT");
-//        String videoUrl = videoUrl0;
-//        String destFileDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download";
-//        String destFileName = "video.mp4";
-//
-//
-//
-//
-//        DownloadUtil.get().download(videoUrl, destFileDir, destFileName, new DownloadUtil.OnDownloadListener() {
-//            @Override
-//            public void onDownloadSuccess(File file) {
-//                runOnUiThread(() -> {
-//                    progressBar.setVisibility(View.GONE);
-//                    progressText.setVisibility(View.GONE);
-//                    videoView.setVideoPath(file.getAbsolutePath());
-//                    videoView.start();
-//                });
-//            }
-//
-//            @Override
-//            public void onDownloading(int progress) {
-//                runOnUiThread(() -> {
-//                    progressBar.setProgress(progress);
-//                    progressText.setText("下载进度: " + progress + "%");
-//                });
-//            }
-//
-//            @Override
-//            public void onDownloadFailed(Exception e) {
-//                e.printStackTrace();
-//            }
-//        });
-        // Example of a call to a native method
-        //EditText tv = binding.sampleText;
-        //tv.setText(stringFromJNI());
     }
 
 
-    void createMusicandPlay(){
+    void createMusicandPlay() throws InterruptedException {
 
 
         genMusic(prompt);
@@ -182,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
      * A native method that is implemented by the 'rowinaimusic' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI();
+    public native String nativeGetMusicById();
     public native String nativeGenMusic(String prompt);
     public native String nativeChat();
     public native String nativeGetCredit();
@@ -190,12 +165,29 @@ public class MainActivity extends AppCompatActivity {
     public int getCredit(){
         return jsonData.getCredit(nativeGetCredit());
     }
-    public boolean genMusic(String prompt){
+    public boolean genMusic(String prompt) throws InterruptedException {
 
 
-        String ret ="";//= nativeGenMusic(prompt);
-        id0 = jsonData.getIDbyGenRet(ret).get(0).id;
-        id1 = jsonData.getIDbyGenRet(ret).get(1).id;
+        String ret;
+        ret = nativeGenMusic(prompt);
+        if(null == ret){
+            Log.i(TAG,"Failed to Generate Music");
+        }
+        do {
+            id0 = jsonData.getIDbyGenRet(ret).get(0).id;
+            id1 = jsonData.getIDbyGenRet(ret).get(1).id;
+            Thread.sleep(500);
+        } while(id0 == null || id1 == null);
+
+        ret = nativeGetMusicById();
+        //wait until the music completes
+        do {
+            status = jsonData.getMusicItems(ret).get(0).status;
+            Log.d(TAG,"STATUS: "+status);
+            ret = nativeGetMusicById();
+            Thread.sleep(1000);
+        }while (!status.equals("complete")); //if the music is still under generating
+
 
         videoUrl0 = jsonData.getVideoUrlByID(id0);
         videoUrl1 = jsonData.getVideoUrlByID(id1);
@@ -206,9 +198,14 @@ public class MainActivity extends AppCompatActivity {
         lyric = jsonData.getMusicItems(ret).get(0).lyric;
         title = jsonData.getMusicItems(ret).get(0).title;
 
-        Log.d("ID",id0+" "+id1);
-        Log.d("VIDEO",videoUrl0+" "+videoUrl1);
-        Log.d("AUDIO",audeoUrl0+" "+audeoUrl0);
+        Log.d(TAG,"id: "+id0+" "+id1);
+        Log.d(TAG,"video "+videoUrl0+" "+videoUrl1);
+        Log.d(TAG,"audio "+ audeoUrl0+" "+audeoUrl0);
+
+
+
+
+
 
 
         return true;
