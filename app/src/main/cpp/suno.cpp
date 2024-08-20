@@ -138,9 +138,10 @@ std::string get_limits(void)
 }
 
 string get_music_by_id(string id){
+    LOGD("%s",id.c_str());
     string ret;
     string response;
-    string endpoint = "clip?id="+id;
+    string endpoint = "get?ids="+id;
     CURLcode code= get_endpoint(endpoint, response);
     if(code != CURLE_OK){
         LOGD("request faile, code %d",code);

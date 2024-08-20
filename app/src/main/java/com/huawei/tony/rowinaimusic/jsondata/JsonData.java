@@ -41,7 +41,7 @@ public class JsonData
 
     public String getVideoUrlByID(String jsonString) {
 
-        jsonString = "[{ \"id\": \"b117b4d2-5a16-44ad-aa3f-abf6b448ee63\", \"title\": \"自我黎明\", \"image_url\": \"https://cdn2.suno.ai/image_b117b4d2-5a16-44ad-aa3f-abf6b448ee63.jpeg\", \"lyric\": \"the lyric\", \"audio_url\": \"https://cdn1.suno.ai/b117b4d2-5a16-44ad-aa3f-abf6b448ee63.mp3\", \"video_url\": \"https://cdn1.suno.ai/b117b4d2-5a16-44ad-aa3f-abf6b448ee63.mp4\", \"created_at\": \"2024-08-18T19:20:22.079Z\", \"model_name\": \"chirp-v3.5\", \"status\": \"complete\", \"gpt_description_prompt\": \"description\", \"prompt\": \"geneated prompt\", \"type\": \"gen\", \"tags\": \"hard rock drum heavy metal guitar powerful aggressive bass\", \"duration\": 150.2, \"error_message\": null }]";
+        //jsonString = "[{ \"id\": \"b117b4d2-5a16-44ad-aa3f-abf6b448ee63\", \"title\": \"自我黎明\", \"image_url\": \"https://cdn2.suno.ai/image_b117b4d2-5a16-44ad-aa3f-abf6b448ee63.jpeg\", \"lyric\": \"the lyric\", \"audio_url\": \"https://cdn1.suno.ai/b117b4d2-5a16-44ad-aa3f-abf6b448ee63.mp3\", \"video_url\": \"https://cdn1.suno.ai/b117b4d2-5a16-44ad-aa3f-abf6b448ee63.mp4\", \"created_at\": \"2024-08-18T19:20:22.079Z\", \"model_name\": \"chirp-v3.5\", \"status\": \"complete\", \"gpt_description_prompt\": \"description\", \"prompt\": \"geneated prompt\", \"type\": \"gen\", \"tags\": \"hard rock drum heavy metal guitar powerful aggressive bass\", \"duration\": 150.2, \"error_message\": null }]";
 
         try {
             // 解析 JSON 字符串

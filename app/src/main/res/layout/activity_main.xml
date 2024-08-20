@@ -19,28 +19,17 @@
 
         <EditText
             android:id="@+id/inputText"
-            android:text="核心主题是鼓励在困境中坚持自我，寻找希望，并积极行动去改变现状。歌词描绘了一个陷入绝望、看不到未来的情境，但同时也强调了即使身处黑暗，我们仍可以成为自己的光，并通过坚持不懈的努力，最终照亮前方的路.音乐风格Heavy metal, hard rock, guitar, bass, drum, powerful, aggresive"
+            android:text="春天的上午，阳光明媚，小鸟叽叽喳喳，走在乡村的小路上，心情愉快，对生活的前景充满了憧憬。音乐风格 流行民歌,二胡, 笛子"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="false"
-            android:enabled="false"
+            android:enabled="true"
             android:textSize="15dp"
 
             android:maxLines="3"
             android:scrollbars="vertical"
             android:hint="音乐生成提示词" />
     </ScrollView>
-<!--    <EditText-->
-<!--        android:id="@+id/inputText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Suno Music"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/button"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-
-<!--        app:layout_constraintVertical_bias="0.082" />-->
 
     <Button
         android:id="@+id/button"
