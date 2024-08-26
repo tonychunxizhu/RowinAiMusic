@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.genmusic.GenMusicFragment">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="可用点数"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="52dp"
+
+        />
+
+    <TextView
+        android:id="@+id/creditLeftText"
+        android:layout_width="152dp"
+        android:layout_height="18dp"
+        android:text="TextView"
+        app:layout_constraintLeft_toRightOf="@id/textView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="54dp"
+
+        />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提示词"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+
+        />
+
+    <ScrollView
+        android:id="@+id/scrollViewPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+
+        >
+
+        <EditText
+            android:id="@+id/promptText"
+            android:layout_width="fill_parent"
+            android:layout_height="60sp"
+            android:enabled="true"
+            android:hint="音乐生成提示词"
+            android:maxLines="4"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:text="冬日凛冽寒风，大雪纷飞，孤独一人行走在乡村小路。音乐风格 黑金属 吉他 贝斯 鼓"
+            android:textSize="15dp" />
+        />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/genButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="生成"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollViewPrompt" />
+
+    <Button
+        android:id="@+id/dlButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="下载"
+        app:layout_constraintLeft_toRightOf="@id/genButton"
+        app:layout_constraintRight_toLeftOf="@id/playButton"
+        app:layout_constraintTop_toBottomOf="@id/scrollViewPrompt" />
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="播放"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintLeft_toRightOf="@id/dlButton"
+        app:layout_constraintRight_toLeftOf="@id/mgmtButton"
+        app:layout_constraintTop_toBottomOf="@id/scrollViewPrompt" />
+
+    <Button
+        android:id="@+id/mgmtButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="管理"
+        app:layout_constraintLeft_toRightOf="@id/playButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollViewPrompt" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="生成状态"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genButton"
+
+
+        />
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="音乐生成状态"
+        android:text=""
+        app:layout_constraintLeft_toRightOf="@id/genButton"
+        app:layout_constraintTop_toBottomOf="@id/genButton"
+
+
+        />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="歌词"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView4" />
+
+    <ScrollView
+        android:id="@+id/scrollViewLyric"
+        android:layout_width="200dp"
+        android:layout_height="600dp"
+        app:layout_constraintLeft_toLeftOf="@id/textView6"
+        app:layout_constraintRight_toLeftOf="@id/videoCover"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <TextView
+            android:id="@+id/lyricText"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+
+            android:hint="生成的歌词"
+            android:scrollbars="vertical"
+             android:layout_height="wrap_content"
+            />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/videoCover"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="视频图片"
+        app:layout_constraintBottom_toTopOf="@id/progressBar"
+        app:layout_constraintLeft_toRightOf="@id/scrollViewLyric"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView6" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/scrollViewLyric"
+        app:layout_constraintTop_toBottomOf="@id/videoCover"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

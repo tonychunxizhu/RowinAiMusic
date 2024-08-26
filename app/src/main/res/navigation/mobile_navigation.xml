@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_gen">
+
+    <fragment
+        android:id="@+id/navigation_gen"
+        android:name="com.aiberry.tony.rowinaimusic.ui.genmusic.GenMusicFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/gen_music"/>
+    <action
+        android:id="@+id/action_gen_to_play"
+        app:destination="@id/navigation_play" />
+
+
+<fragment
+        android:id="@+id/navigation_play"
+        android:name="com.aiberry.tony.rowinaimusic.ui.playmusic.PlayMusicFragment"
+        android:label="@string/title_playmusic"
+        tools:layout="@layout/play_music" />
+
+    <fragment
+        android:id="@+id/navigation_mgmt"
+        android:name="com.aiberry.tony.rowinaimusic.ui.managemusic.ManageMusicFragment"
+        android:label="@string/title_mgmtmusic"
+        tools:layout="@layout/manage_music" />
+</navigation>

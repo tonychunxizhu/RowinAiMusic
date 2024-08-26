@@ -1,105 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:paddingTop="?attr/actionBarSize">
 
-    <ScrollView
-        android:id="@+id/scrollViewPrompt"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/inputText"
-            android:text="春天的上午，阳光明媚，小鸟叽叽喳喳，走在乡村的小路上，心情愉快，对生活的前景充满了憧憬。音乐风格 流行民歌,二胡, 笛子"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="false"
-            android:enabled="true"
-            android:textSize="15dp"
-
-            android:maxLines="3"
-            android:scrollbars="vertical"
-            android:hint="音乐生成提示词" />
-    </ScrollView>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="生成音乐/播放"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="188dp"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewPrompt"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:menu="@menu/bottom_nav_menu" />
 
-    <ScrollView
-        android:id="@+id/scrollViewOutput"
+    <fragment
+        android:id="@+id/nav_host_fragment_activity_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
-        <TextView
-            android:id="@+id/replyText"
-            android:hint="点击上面按钮进行测试播放已经生成的音乐。下一步可用提示词来生成音乐"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:scrollbars="vertical"
-            />
-    </ScrollView>
-
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="342dp"
-        android:layout_height="310dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewOutput" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:tooltipText="bar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
-        />
-    <TextView
-        android:id="@+id/progressText"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/progressBar"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:text=""
-        android:layout_centerHorizontal="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"/>
-
-    />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="30dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

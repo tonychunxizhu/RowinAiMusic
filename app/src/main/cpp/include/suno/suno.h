@@ -20,7 +20,7 @@ using std::string;
 string get_limit(void);
 string get_musics();
 string get_music_by_id(string id);
-string generate_music(string prompt);
+string generate_music(string prompt, string logfile);
 int suno_init();
 CURLcode get_endpoint(string endpoint, string &resp);
 CURLcode post_endpoint(string endpoint, string prompt, string &resp);

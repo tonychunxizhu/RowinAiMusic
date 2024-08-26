@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RowinAiMusic</string>
+    <string name="login">RowinAiMusic</string>
+
+    <string name="title_home">生成音乐</string>
+
+    <string name="title_playmusic">播放音乐</string>
+    <string name="title_mgmtmusic">管理音乐</string>
 </resources>

@@ -4,21 +4,27 @@
 #include <string>
 #include "curl/curl.h"
 #include <iostream>
+#include <fstream>
 #include "nlohmann/json.hpp"
 #include <android/log.h>
 #include <unistd.h>
 #include "suno/suno.h"
 #include "util/util.h"
 
-#define TAG "AIMUSIC" // 这个是自定义的LOG的标识
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,TAG ,__VA_ARGS__) // 定义LOGD类型
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG ,__VA_ARGS__) // 定义LOGI类型
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,TAG ,__VA_ARGS__) // 定义LOGW类型
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG ,__VA_ARGS__) // 定义LOGE类型
-#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,TAG ,__VA_ARGS__) // 定义LOGF类型
+//#define TAG "AIMUSIC" // 这个是自定义的LOG的标识
+//#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,TAG ,__VA_ARGS__) // 定义LOGD类型
+//#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG ,__VA_ARGS__) // 定义LOGI类型
+//#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,TAG ,__VA_ARGS__) // 定义LOGW类型
+//#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG ,__VA_ARGS__) // 定义LOGE类型
+//#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,TAG ,__VA_ARGS__) // 定义LOGF类型
 
 using nlohmann::json;
 using std::string;
+using std::ofstream;
+using std::ios;
+using std::fstream;
+using std::endl;
+
 //extern string BASE_URL;
 int suno_init(){
     return 1;
@@ -139,13 +145,12 @@ std::string get_limits(void)
 
 string get_music_by_id(string id){
     LOGD("%s",id.c_str());
-    string ret;
+    string ret="";
     string response;
     string endpoint = "get?ids="+id;
     CURLcode code= get_endpoint(endpoint, response);
     if(code != CURLE_OK){
         LOGD("request faile, code %d",code);
-        ret = "request failed";
     }
     else
     {
@@ -188,12 +193,26 @@ string get_limit(){
     return ret;
 }
 
-string generate_music(string prompt){
+string generate_music(string prompt, string _logfile){
     string ret;
     string response;
+
+    ofstream log;
+
+    log.open(_logfile, ios::out | ios::app);
+
+    if(log.is_open()){
+        LOGD("%s", "Logfile is open");
+    } else{
+        LOGD("%s", "Logfile is not open");
+    }
+    LOGD("%s", _logfile.c_str());
+
+
     CURLcode code= post_endpoint("generate", prompt,response);
     if(code != CURLE_OK){
         LOGD("request faile, code %d",code);
+        log<<TAG<<"request faile, code "<<code<<endl;
         ret = "request failed";
     }
     else
@@ -201,6 +220,7 @@ string generate_music(string prompt){
         ret = response;
     }
 
+    log.close();
     LOGD("%s",ret.c_str());
     return ret;
 }

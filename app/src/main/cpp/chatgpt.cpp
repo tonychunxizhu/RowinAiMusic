@@ -22,7 +22,7 @@ std::string chatentry() { //doesn't work now
 //
 // Construct a POST request to the chat model endpoint and process the response.
 std::string getCompletion(const std::string &prompt) {//, const string& model = "gpt-4o-mini") {
-    std::string apiKey = ";
+    std::string apiKey ="";
     std::string baseUrl = "https://api.openai.com/v1/chat/completions";
     std::string response;
     CURL *curl = curl_easy_init();
